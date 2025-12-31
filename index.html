@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year, My Love!</title>
+    <style>
+        /* --- CSS Styles for the Pink Theme --- */
+        body {
+            /* A soft pink gradient background */
+            background: linear-gradient(135deg, #ffe4e1 0%, #ffc0cb 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #5a3a42; /* A soft brownish-red color for text */
+        }
+
+        /* The main white card containing everything */
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px 30px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
+            text-align: center;
+            max-width: 90%;
+            width: 500px;
+            border: 3px solid #fff0f5;
+        }
+
+        /* Main Heading Style */
+        h1 {
+            color: #d63384; /* A vibrant pink */
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Submessage Style */
+        .sub-message {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        /* Sticker Section */
+        .sticker-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Space between images */
+            margin-bottom: 30px;
+        }
+
+        .sticker {
+            width: 140px; /* Adjust size if needed */
+            height: auto;
+            border-radius: 15px;
+            /* A cute little bounce animation */
+            animation: bounce 3s infinite ease-in-out;
+        }
+        /* Offset the second sticker's animation slightly */
+        .sticker:nth-child(2) {
+             animation-delay: 1.5s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Timer Section Styles */
+        .timer-box {
+            background-color: #fff0f5; /* Lavender blush background for timer */
+            padding: 25px;
+            border-radius: 20px;
+            border: 2px dashed #d63384;
+        }
+        
+        .timer-title {
+            font-weight: bold;
+            color: #d63384;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        #timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .time-segment {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .number {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #e91e63;
+            background: white;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .label {
+            font-size: 0.8em;
+            margin-top: 8px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Happy New Year My Heart!</h1>
+        <p class="sub-message">Excited to spend the rest of my years with you.</p>
+
+        <div class="sticker-container">
+            <img src="sticker1.png" alt="Bunny with heart" class="sticker">
+            <img src="sticker2.png" alt="Happy sitting bunny" class="sticker">
+        </div>
+
+        <div class="timer-box">
+            <span class="timer-title">We have been together for:</span>
+            <div id="timer">
+                <div class="time-segment">
+                    <span id="days" class="number">00</span>
+                    <span class="label">Days</span>
+                </div>
+                <div class="time-segment">
+                    <span id="hours" class="number">00</span>
+                    <span class="label">Hrs</span>
+                </div>
+                <div class="time-segment">
+                    <span id="minutes" class="number">00</span>
+                    <span class="label">Mins</span>
+                </div>
+                <div class="time-segment">
+                    <span id="seconds" class="number">00</span>
+                    <span class="label">Secs</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* --- JavaScript for the Timer --- */
+
+        // 1. Set the date we started together (Month is 0-indexed in JS, so Nov is 10)
+        // Year, Month (0-11), Day, Hour, Minute, Second
+        const startDate = new Date(2024, 10, 27, 0, 0, 0).getTime();
+
+        // 2. Function to update the timer every second
+        const timerFunction = setInterval(function() {
+
+            // Get today's date and time
+            const now = new Date().getTime();
+
+            // Find the distance between now and the start date
+            const distance = now - startDate;
+
+            // Time calculations for days, hours, minutes and seconds
+            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Add leading zeros just to make it look pretty if number is under 10
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+            // Output the result into the specific HTML elements
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+
+        }, 1000); // Run this every 1000 milliseconds (1 second)
+    </script>
+
+</body>
+</html>
